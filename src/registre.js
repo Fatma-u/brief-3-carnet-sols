@@ -43,20 +43,38 @@ export function verifierObservation(saisie, observations) {
   else {
     for(const obs of observations){
       if(obs.id===saisie.id){
-        erreur.push(`Cet id existe déjà veuillez en entrer un autre`)
+        erreur.push(`Cet id existe déjà veuillez en entrer un autre`);
       }
     }
   }
+  if(!TEXTURES.includes (saisie.texture)){
+    erreur.push(`Veuillez entrer une texture valide svp :${TEXTURES}`);
+  }
+  else{
+    observations.texture=saisie.texture;
+  }
+  if(saisie.parcelle.trim===''){
+    erreur.push(`Veuillez entrer svp une parcelle`);
+  }
+  const p=Number((saisie.pH).replace(',', '.'));
+  if( p<0 || p>14 || isNaN(p) || saisie.pH ===''){
+    erreur.push(`Veuillez utiliser un ph valide entre 0 et 14`);
+  }
+  if(!HUMIDITES.includes(saisie.etatHumidite)){
+    erreur.push(`Veuillez enter une humidité valide:${HUMIDITES}`);
+  }
+
   return erreur;
 }
 
 // Fabrique l'observation à enregistrer à partir d'une saisie VALIDE : pH devient un nombre.
 export function creerObservation(saisie) {
-  throw new Error('TODO : coder creerObservation dans src/registre.js');
+  const val={...saisie};
+  val.pH=Number((saisie.pH).replace(',', '.'));
+  return val;
 }
 
 // Ajoute la saisie au carnet si elle est valide (verifierObservation, puis creerObservation).
 // Renvoie les erreurs : [] si l'observation a été ajoutée ; sinon les messages, et rien n'est ajouté.
 export function ajouterObservation(observations, saisie) {
-  throw new Error('TODO : coder ajouterObservation dans src/registre.js');
 }
