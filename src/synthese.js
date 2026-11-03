@@ -15,7 +15,7 @@ export function phMinMax(observations) {
   let min=observations[0].pH;
   let max=observations[0].pH;
   for(const observation of observations){
-    if(observation.pH<min){
+    if(observation.pH<min){  
       min=observation.pH;
     }
     if(observation.pH>max){
@@ -29,7 +29,15 @@ export function phMinMax(observations) {
 // Exemple : { sableux: 3, limoneux: 4, argileux: 3 }
 // Liste vide : {} (un objet vide).
 export function compterParTexture(observations) {
-  throw new Error('TODO : coder compterParTexture dans src/synthese.js');
+  const compt={};
+  for (const observation of observations){
+    if(compt[observation.texture]===undefined){
+      compt[observation.texture]=1;
+    }
+    else{
+    compt[observation.texture]++;}
+  }
+  return compt;
 }
 
 // Renvoie un NOUVEAU tableau avec les observations dont le pH est STRICTEMENT inférieur au seuil.
