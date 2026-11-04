@@ -43,7 +43,7 @@ export function verifierObservation(saisie, observations) {
   else {
     for(const obs of observations){
       if(obs.id===saisie.id){
-        erreur.push(`Cet id existe déjà veuillez en entrer un autre`);
+        erreur.push(`Ce id existe déjà veuillez en entrer un autre`);
       }
     }
   }
@@ -56,7 +56,7 @@ export function verifierObservation(saisie, observations) {
   if(saisie.parcelle.trim===''){
     erreur.push(`Veuillez entrer svp une parcelle`);
   }
-  const p=Number((saisie.pH).replace(',', '.'));
+  const p=versNombre(saisie.pH);
   if( p<0 || p>14 || isNaN(p) || saisie.pH ===''){
     erreur.push(`Veuillez utiliser un ph valide entre 0 et 14`);
   }
@@ -70,7 +70,7 @@ export function verifierObservation(saisie, observations) {
 // Fabrique l'observation à enregistrer à partir d'une saisie VALIDE : pH devient un nombre.
 export function creerObservation(saisie) {
   const val={...saisie};
-  val.pH=Number((saisie.pH).replace(',', '.'));
+  val.pH=versNombre(saisie.pH);
   return val;
 }
 

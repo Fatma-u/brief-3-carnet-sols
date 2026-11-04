@@ -45,7 +45,7 @@ export function modifierObservation(observations, id, champ, valeur) {
   if(champ==='pH'){
     valeurSaisie=versNombre(valeur);
     if(isNaN(valeurSaisie)|| valeurSaisie <0 || valeurSaisie> 14){
-    return erreurs.push("Veuillez entrer un ph valide compris entre 0 et 14");
+    return erreurs.push("Veuillez utiliser un ph valide entre 0 et 14");
   }
 }  
 if(erreurs.length>0){
@@ -54,17 +54,14 @@ if(erreurs.length>0){
 trouve[champ]=valeurSaisie;
   return [];
 }
-
-
-
 // Renvoie une COPIE triée par pH décroissant. Le tableau reçu ne doit pas changer d'ordre.
 export function trierParPhDecroissant(observations) {
-  throw new Error('TODO Bonus : coder trierParPhDecroissant dans src/bonus.js');
+  return [...observations].sort((a,b)=>b.pH-a.pH);
 }
 
 // Renvoie { texture, nombre } pour la texture la plus fréquente, ou null si la liste est vide.
 // En cas d'égalité, la première texture rencontrée l'emporte.
 // Exemple : { texture: 'limoneux', nombre: 4 }
 export function textureLaPlusFrequente(observations) {
-  throw new Error('TODO Bonus : coder textureLaPlusFrequente dans src/bonus.js');
+  
 }
