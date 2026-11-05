@@ -76,6 +76,11 @@ if(erreurs.length > 0){
 await enregistrerJson(FICHIER_DONNEES,observations);
 console.log(`Observation ${saisie.id} ajoutée. Le carnet compte ${observations.length} observation(s).`); 
 }
+//Choix 2:Lister 
+function lister(observations){
+  console.log(`------Liste des observations (${observations.length})-----`);
+  console.log(listerObservations(observations));
+}
 
 
 fermerSaisie();
