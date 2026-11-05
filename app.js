@@ -206,6 +206,79 @@ async function supprimer(observations){
   await enregistrerJson(FICHIER_DONNEES,observations);
   console.log(`Observation ${id} supprimé. Le carnet compte ${observations.length} observation(s).`);
 }
+//Choix 7: Modifier une observation
+async function modif(observations){
+  console.log('------------------Modifier une observation---------------------');
+  const saisie=await demander('Point à modifier:');
+  if(saisie===null){
+    return;
+  }
+  const id =saisie.toUpperCase();
+  const observation=trouverParId(observations,id);
+  if(observation===undefined){
+     console.log(`L'observation ${id} est introuvable`);
+     return;
+  }
+  console.log(formaterObservation(observation));
+  console.log('Champ à modifier:');
+  console.log('1. Parcelle');
+  console.log('2. Texture');
+  console.log('3. pH');
+  console.log('4.Etat d\'humidité');
+  const choixChamp=await demander('Votre choix:');
+  if(choixChamp===null){
+    return;
+  }
+  let champ;
+  let invite;
+  switch(choixChamp){
+    case '1':{
+      champ='parcelle';
+      invite='Nouvelle parcelle:';
+      break;
+    }
+    case '2':{
+      champ='texture';
+      invite=`Nouvelle texture:(${TEXTURES.join(',')}):`;
+      break;
+    }
+    case '3':{
+      champ='pH';
+      invite='Nouveau pH :';
+      break;
+    }
+    case '4':{
+      champ='etatHumidite';
+      invite=`Nouvelle humidité:(${HUMIDITES.join(',')}):`;
+      break;
+    }
+    default:{
+      console.log('Choix inconnu: retour au menu');
+      return;
+    }
+  }
+  const saisieValeur=await demander(invite);
+  if(saisieValeur===null){
+    return;
+  }
+  let valeur=saisieValeur;
+  if(champ==='parcelle'){
+    valeur=saisieValeur.toUpperCase();
+  }
+  else if(champ==='texture' || champ==='etatHumidite'){
+    valeur=saisieValeur.toLowerCase();
+  }
+  const erreurs=modifierObservation(observations, id, champ, valeur);
+  if(erreurs.length>0){
+    console.log('Modification réfusée:');
+    for (const erreur of erreurs){
+      console.log(`${erreur}`);
+    }
+  return;
+  }
+  await enregistrerJson(FICHIER_DONNEES,observations);
+  console.log(`Observation ${id} à été modifiée`);
+  }
 
 
 fermerSaisie();
