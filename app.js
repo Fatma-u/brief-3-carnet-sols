@@ -185,6 +185,27 @@ async function synthese(observations){
     console.log('Ces points ne sont pas un diagnostic de fertilisation : ils servent à préparer l\'échange avec le coach');
 
 }
+//Choix 6: Supprimer une observation
+async function supprimer(observations){
+  console.log('----------------Supprimer une observation------------------');
+  const saisie=await demander('Point à supprimer:');
+  if(saisie===null){
+    return;
+  }
+  const id =saisie.toUpperCase();
+  if(trouverParId(observations,id)===undefined){
+     console.log(`L'observation ${id} est introuvable`);
+     return;
+  }
+  const confirmation=await demander(`Confirmer la suppression de ${id} (o/n):`);
+  if(confirmation===null|| confirmation.toLowerCase()!=='o'){
+    console.log('Suppression annulée');
+    return;
+  }
+  supprimerObservation(observations,id);
+  await enregistrerJson(FICHIER_DONNEES,observations);
+  console.log(`Observation ${id} supprimé. Le carnet compte ${observations.length} observation(s).`);
+}
 
 
 fermerSaisie();
