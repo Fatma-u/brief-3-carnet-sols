@@ -132,6 +132,28 @@ async function rechercher(observations){
 
   }
 }
+//Choix 4 : Trier par pH
+  async function trier(observations){
+    console.log('---------Trier par pH------------');
+    console.log('1-Par ordre croissant');
+    console.log('2-Par ordre décroissant');
+    const sousChoix=await demander('Votre choix:');
+    if(sousChoix ===null){
+        return;
+      }
+    switch(sousChoix){
+      case'1':{
+        console.log(listerObservations((trierParPh(observations))));
+        break;
+      }
+      case '2':{
+        console.log(listerObservations((trierParPhDecroissant(observations))));
+        break;
+      }
+      default:
+        console.log('Choix inconnu: retour au menu');
+    }
+  }
 
 
 fermerSaisie();
