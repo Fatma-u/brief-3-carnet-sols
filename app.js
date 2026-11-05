@@ -81,6 +81,57 @@ function lister(observations){
   console.log(`------Liste des observations (${observations.length})-----`);
   console.log(listerObservations(observations));
 }
+//Choix 3: Rechercher par point,parcelle et texture
+async function rechercher(observations){
+  console.log('');
+  console.log('-------------------RECHERCHER------------');
+  console.log('1. Par point(Identifiant)');
+  console.log('2. Par parcelle');
+  console.log('3. Par observation texture');
+
+  const sousChoix =await demander('Votre choix:');
+  if(sousChoix === null){ 
+    return ;
+  }
+  switch(sousChoix){
+   
+    case'1':{
+      const saisie=await demander('Point :');
+      if(saisie===null){
+        return;
+      }
+      const id=saisie.toUpperCase();
+      const observation=trouverParId(observations,id);
+      console.log(observation===undefined ? `observation ${id} introuvable.`:formaterObservation(observation));
+      break;
+    }
+
+    case'2':{
+      const saisie=await demander('Parcelle :');
+       if(saisie===null){
+        return;
+       }
+      const parcelle=saisie.toUpperCase();
+      const trouve=filtrerParParcelle(observations, parcelle);
+      console.log(`${trouve.length} observation(s) sur la parcelle ${parcelle} :`);
+      console.log(listerObservations(trouve));
+      break;
+    }
+    case'3':{
+      const saisie=await demander('Texture:');
+       if(saisie===null){
+        return;
+       }
+      const trouve=filtrerParTexture(observations,texture);
+      console.log(`${trouve.length} observation(s) sur la texture ${texture}:`);
+      console.log(listerObservations(trouve));
+      break;
+    }
+    default :
+    console.log('Choix inconnu: retour au menu');
+
+  }
+}
 
 
 fermerSaisie();
