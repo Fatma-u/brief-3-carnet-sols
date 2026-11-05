@@ -279,8 +279,82 @@ async function modif(observations){
   await enregistrerJson(FICHIER_DONNEES,observations);
   console.log(`Observation ${id} à été modifiée`);
   }
+//--------------------Programme principal---------------------
+async function main() {
+  ouvrirSaisie();
+  afficherAccueil();
 
+  let observations=[];
+  try{
+    observations=await chargerJson(FICHIER_DONNEES);
+    console.log(`${observations.length} observation(s) chargée(s) depuis ${FICHIER_DONNEES}.`);
+  }
+  catch(erreur){
+    console.log(`Impossible de lire ${FICHIER_DONNEES} : ${erreur.message}. Le carnet démarre vide.`);
+    observations=[];
+  }
+  let continu=true;
+  while(continu){
+    afficherMenu();
+    const choix=await demander('Votre choix: ');
+    //Saisie fermée (contrôle C):on quitte
+    if(choix===null){
+      break;
+    }
+    try{
+      switch(choix){
+        case'1':{
+          await ajouter(observations);
+          break;
+        }
+        case'2':{
+          await lister(observations);
+          break;
+        }
+        case'3':{
+          await rechercher(observations);
+          break;
+        }
+        case'4':{
+          await trier(observations);
+          break;
+        }
+        case'5':{
+          await synthese(observations);
+          break;
+        }
+        case '6':{
+          await supprimer(observations);
+          break;
+        }
+        case '7':{
+          await modif(observations);
+          break;
+        }
+        case'0':{
+          console.log('Au revoir!');
+          continu=false;
+          break;
+        }
+        default:{
+          console.log(`Le choix ${choix},Tapez un numéro du menu`);
+        }
+    }
 
+  }
+  catch(erreur){
+    //Aucune erreur n'arrête le programme ,on renvoi toujours le Menu
+    if(String(erreur.message).startsWith('TODO')){
+      console.log(`A completer: ${erreur.message}`);
+    }
+    else{
+      console.log(`Erreur inattendu:${erreur.message}`);
+    }
+    }
+
+}
 fermerSaisie();
 
+}
 main();
+
