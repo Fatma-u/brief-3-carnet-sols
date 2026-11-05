@@ -122,7 +122,8 @@ async function rechercher(observations){
        if(saisie===null){
         return;
        }
-      const trouve=filtrerParTexture(observations,texture);
+      const texture=saisie.toLowerCase();
+      const trouve=filtrerParTexture(observations, texture);
       console.log(`${trouve.length} observation(s) sur la texture ${texture}:`);
       console.log(listerObservations(trouve));
       break;
@@ -169,7 +170,7 @@ async function synthese(observations){
     for(const [texture,nombre] of Object.entries(compterParTexture(observations))){
       console.log(`${texture}:${nombre}`);
     }
-    const frequente=textureLaPlusFrequente(observations);
+    const frequente=Object.entries(textureLaPlusFrequente(observations));
     if(frequente===null){
       console.log('Texture la plus fréquente : aucune donnée');
     }
