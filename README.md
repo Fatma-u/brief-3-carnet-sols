@@ -37,11 +37,31 @@ Sous PowerShell, si `npm` est bloqué : `npm.cmd test`.
 
 ## Données
 
-✏️ *Le fichier, le nombre d'observations, les champs (voir [docs/dictionnaire-donnees.md](docs/dictionnaire-donnees.md)), le pH sans unité. Rappelez qu'elles sont fictives.*
+Le nombre d'observations: 10;
+
+les champs:
+
+-id:Identifiant unique du point d'observation de type texte non vide.
+
+-parcelle:Portion de terre où se trouve le point de type texte nom vide et enregistrée en majuscules.
+
+-texture:Le type de sol observé de type texte	appartenant à la liste de textures (limoneux,argileux,sableux).
+
+-pH:Assidité du sol sans unité de type nombre compro
+is entre 0 et 14 avec virgule acceptée.
+
+-etatHumidite:Etat d'humidité du sol au relévé de type texte appartenant à la liste des états autorisés(sec,humide et intermédiare).
+
+Ces données étant fictives.
+
 
 ## Limites
 
-✏️ *Au moins trois. Par exemple : le carnet repère des valeurs à discuter, mais ne produit aucun diagnostic de fertilisation.*
+-Lorqu'on entre un champ invalide(exp:id) le programme ne s'arrête pas directement ,il renvoi l'erreur que lorsque toutes les questions on été répondus.
+
+-Les données doivent être toute saisies par l'utilisateur
+
+-On ne connait pas vraiment le sueil du pH pour prendre des décisions adaptées.
 
 ## Documents
 
@@ -49,4 +69,9 @@ Sous PowerShell, si `npm` est bloqué : `npm.cmd test`.
 
 ## Auteur
 
-✏️ *Prénom NOM, compte GitHub. Entraide : avec qui, sur quoi.*
+ Fatoumata KONE, Fatma-u.
+ Entraide : Toure Emmanuel :la logique des fonctions;
+    
+Fofana Fanta Latifat:Pour la compréhension du sujet agronomique 
+  
+Kamagaté Salia Abdallah pour les tests 
