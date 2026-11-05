@@ -16,6 +16,5 @@ La rédaction du fichier app.js.
 
 Faire la rédaction du fichier au fur et à mesure selon les choix du menu et des fiches de poste dans `fiches`.  
 
-3. **L'entraide** (qui m'a aidé, qui j'ai aidé, sur quoi) : 
-
+3. **L'entraide** (qui m'a aidé, qui j'ai aidé, sur quoi) : Fofana Fanta Latifa ,Pour la compréhension des éléments agronomiques.
 
